@@ -1,0 +1,32 @@
+{
+  "name": "@any-cloud/firebase",
+  "description": "any-cloud runtime for firebase",
+  "entry": "./dist/functions.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint",
+    "start": "yarn firebase serve --only functions",
+    "watch": "parcel functions.js --target node & yarn firebase serve --only functions",
+    "build": "parcel build functions.js --target node --detailed-report",
+    "serve": "yarn firebase serve --only functions",
+    "emulator": "yarn firebase emulators:start --only functions",
+    "shell": "yarn firebase functions:shell",
+    "predeploy": "yarn build",
+    "deploy": "yarn firebase deploy --only functions",
+    "logs": "yarn firebase functions:log",
+    "test": "echo 'no tests'"
+  },
+  "engines": {
+    "node": 10
+  },
+  "dependencies": {
+    "firebase-admin": "^8.0.0",
+    "firebase-functions": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "firebase-functions-test": "^0.1.6",
+    "firebase-tools": "^6.9.2"
+  },
+  "private": true
+}
