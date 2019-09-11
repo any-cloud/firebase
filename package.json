@@ -17,7 +17,7 @@
     "test": "echo 'no tests'"
   },
   "engines": {
-    "node": 10
+    "node": "^10"
   },
   "dependencies": {
     "firebase-admin": "^8.0.0",
