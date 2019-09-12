@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "eslint",
     "start": "yarn firebase serve --only functions",
-    "watch": "parcel functions.js --target node & yarn firebase serve --only functions",
-    "build": "parcel build functions.js --target node --detailed-report",
+    "build": "babel src/ --out-dir lib/",
     "serve": "yarn firebase serve --only functions",
     "emulator": "yarn firebase emulators:start --only functions",
     "shell": "yarn firebase functions:shell",
@@ -20,13 +19,21 @@
     "node": "^10"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "firebase-admin": "^8.0.0",
     "firebase-functions": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "prettier": "^1.18.2",
     "firebase-functions-test": "^0.1.6",
     "firebase-tools": "^6.9.2"
+  },
+  "peerDependencies": {
+    "@any-cloud/core": "*"
   },
   "private": true
 }
