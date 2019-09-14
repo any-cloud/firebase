@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 const { spawn } = require("child_process");
 const { cron: appCron, workers: appWorkers } = require(process.cwd());
 
@@ -6,13 +7,7 @@ export default {
   command: "start",
   aliases: [],
   desc: "start a simulated firebase runtime of any-cloud",
-  builder: yargs => {
-    yargs.option("project", {
-      alias: "p",
-      type: "string",
-      description: "firebase project id"
-    });
-  },
+  builder: yargs => {},
   handler: argv => {
     if (appWorkers) {
       console.log("worker queue not implemented for firebase yet");
@@ -20,15 +15,17 @@ export default {
     if (appCron) {
       console.log("cron not implemented for firebase yet");
     }
-    const args = ["serve"];
-    if (argv.project) {
-      args.push("--project");
-      args.push(argv.project);
-    }
+    const args = ["serve", ...process.argv.slice(3)];
+    const newCwd = path.join(__dirname, "../../");
+    const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");
+    try {
+      fs.unlinkSync(appCodeLinkPath);
+    } catch (e) {}
+    fs.symlinkSync(process.cwd(), appCodeLinkPath);
     const child = spawn(
       require.resolve("firebase-tools/lib/bin/firebase"),
       args,
-      { cwd: path.join(__dirname, "../../") }
+      { cwd: newCwd, env: process.env }
     );
 
     child.stdout.pipe(process.stdout);
