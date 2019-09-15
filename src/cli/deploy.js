@@ -8,7 +8,6 @@ export default {
   desc: "deploy your application to firebase",
   builder: yargs => {},
   handler: argv => {
-    console.log("here");
     if (appWorkers) {
       console.log("worker queue not implemented for firebase yet");
     }

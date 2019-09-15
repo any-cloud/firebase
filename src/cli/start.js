@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { spawn } = require("child_process");
+const { spawn, spawnSync } = require("child_process");
 const { cron: appCron, workers: appWorkers } = require(process.cwd());
 
 export default {
@@ -18,9 +18,7 @@ export default {
     const args = ["serve", ...process.argv.slice(3)];
     const newCwd = path.join(__dirname, "../../");
     const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");
-    try {
-      fs.unlinkSync(appCodeLinkPath);
-    } catch (e) {}
+    spawnSync("rm", ["-rf", appCodeLinkPath]);
     fs.symlinkSync(process.cwd(), appCodeLinkPath);
     const child = spawn(
       require.resolve("firebase-tools/lib/bin/firebase"),
