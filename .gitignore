@@ -2,4 +2,3 @@ node_modules
 lib
 AC_APPLICATION_CODE
 firebase-debug.log
-yarn-error.log

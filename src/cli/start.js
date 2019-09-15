@@ -17,7 +17,7 @@ export default {
     }
     const args = ["serve", ...process.argv.slice(3)];
     const newCwd = path.join(__dirname, "../../");
-    const appCodeLinkPath = path.join(newCwd, "node_modules", "app");
+    const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");
     try {
       fs.unlinkSync(appCodeLinkPath);
     } catch (e) {}
