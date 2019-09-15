@@ -41,7 +41,7 @@ export const get = async aKey => {
     const namespace = unwrapKey(aKey).split(keySep);
     let lastKeyPart = namespace.pop();
     console.error(`key not found '${unwrapKey(aKey)}'`);
-  } else if (!result.empty) {
+  } else if (result.exists) {
     return result.data();
   }
 };
@@ -51,7 +51,7 @@ export const getAll = async partialKey => {
   const documentRefs = await collectionRef.listDocuments();
   if (documentRefs.length === 0) return [];
   const documentSnapshots = await db.getAll(...documentRefs);
-  return documentSnapshots.map(({ data }) => data()).filter(x => !!x);
+  return documentSnapshots.filter(doc => doc.exists).map(doc => doc.data());
 };
 
 export const remove = aKey => db.doc(unwrapKey(aKey)).delete();
