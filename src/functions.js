@@ -1,5 +1,5 @@
 import { https } from "firebase-functions";
-import { http as appHttp } from "../AC_APPLICATION_CODE";
+import { http as appHttp } from "app";
 
 const server = appHttp();
 
