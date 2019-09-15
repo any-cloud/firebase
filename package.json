@@ -1,6 +1,6 @@
 {
   "name": "@any-cloud/firebase",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "any-cloud runtime for firebase",
   "entry": "./lib/functions.js",
   "main": "lib/functions.js",
@@ -38,6 +38,5 @@
   },
   "peerDependencies": {
     "@any-cloud/core": "*"
-  },
-  "private": true
+  }
 }
