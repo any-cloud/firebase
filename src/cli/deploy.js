@@ -1,9 +1,6 @@
 const path = require("path");
-console.log("foo");
 const { spawn, spawnSync } = require("child_process");
-console.log("bar");
 const { cron: appCron, workers: appWorkers } = require(process.cwd());
-console.log("baz");
 
 export default {
   command: "deploy",

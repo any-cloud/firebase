@@ -18,7 +18,7 @@
     "test": "echo 'no tests'"
   },
   "engines": {
-    "node": "^10"
+    "node": "10"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
