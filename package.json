@@ -1,6 +1,6 @@
 {
   "name": "@any-cloud/firebase",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "any-cloud runtime for firebase",
   "entry": "./lib/functions.js",
   "main": "lib/functions.js",
@@ -21,6 +21,7 @@
     "node": "10"
   },
   "dependencies": {
+    "@any-cloud/core": "^0.0.5",
     "@babel/runtime": "^7.5.5",
     "firebase-admin": "^8.5.0",
     "firebase-functions": "^3.2.0",
@@ -28,7 +29,6 @@
     "grpc": "^1.23.3"
   },
   "devDependencies": {
-    "@any-cloud/core": "^0.0.3",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
@@ -36,8 +36,5 @@
     "eslint": "^6.4.0",
     "firebase-functions-test": "^0.1.6",
     "prettier": "^1.18.2"
-  },
-  "peerDependencies": {
-    "@any-cloud/core": "*"
   }
 }
