@@ -16,7 +16,7 @@
     "deploy": "yarn firebase deploy --only functions",
     "logs": "yarn firebase functions:log",
     "test": "echo 'no tests'",
-    "prepublish": "rm -rf AC_APPLICATION_CODE || yarn remove app || true"
+    "prepublishOnly": "rm -rf AC_APPLICATION_CODE || yarn remove app || true"
   },
   "engines": {
     "node": "10"
