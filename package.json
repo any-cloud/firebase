@@ -1,6 +1,6 @@
 {
   "name": "@any-cloud/firebase",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "any-cloud runtime for firebase",
   "entry": "./lib/functions.js",
   "main": "lib/functions.js",
@@ -15,7 +15,8 @@
     "predeploy": "yarn build",
     "deploy": "yarn firebase deploy --only functions",
     "logs": "yarn firebase functions:log",
-    "test": "echo 'no tests'"
+    "test": "echo 'no tests'",
+    "prepublish": "rm -rf AC_APPLICATION_CODE || yarn remove app || true"
   },
   "engines": {
     "node": "10"

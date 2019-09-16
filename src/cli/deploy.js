@@ -21,6 +21,8 @@ export default {
     spawnSync("rm", ["-rf", appCodeLinkPath]);
     console.log("copying new app code to stage");
     spawnSync("cp", ["-R", process.cwd(), appCodeLinkPath]);
+    console.log("adding app as dependency");
+    spawnSync("yarn", ["add", appCodeLinkPath], { cwd: newCwd });
     console.log("deploying with firebase");
     const child = spawn(
       require.resolve("firebase-tools/lib/bin/firebase"),
@@ -32,6 +34,11 @@ export default {
     child.stderr.pipe(process.stderr);
 
     child.on("close", code => {
+      // FIXME: clean this up more reliably
+      console.log("cleaning up");
+      spawnSync("yarn", ["remove", appCodeLinkPath], {
+        cwd: newCwd
+      });
       console.log(`firebase process exited with code ${code}`);
       process.exit(0);
     });

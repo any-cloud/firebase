@@ -20,6 +20,9 @@ export default {
     const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");
     spawnSync("rm", ["-rf", appCodeLinkPath]);
     fs.symlinkSync(process.cwd(), appCodeLinkPath);
+    console.log("adding app as dependency");
+    spawnSync("yarn", ["link"], { cwd: appCodeLinkPath });
+    spawnSync("yarn", ["link", "app"], { cwd: newCwd });
     const child = spawn(
       require.resolve("firebase-tools/lib/bin/firebase"),
       args,
