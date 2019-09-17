@@ -1,7 +1,7 @@
 import { https } from "firebase-functions";
-import { http as appHttp } from "app";
+import { http } from "@any-cloud/core";
 
-const server = appHttp();
+const server = http();
 
 // Graphql api
 // https://us-central1-<project-name>.cloudfunctions.net/api/

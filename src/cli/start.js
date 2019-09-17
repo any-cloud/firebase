@@ -1,20 +1,16 @@
+import { init } from "@any-cloud/core";
 const path = require("path");
 const fs = require("fs");
 const { spawn, spawnSync } = require("child_process");
-const { cron: appCron, workers: appWorkers } = require(process.cwd());
 
 export default {
   command: "start",
   aliases: [],
   desc: "start a simulated firebase runtime of any-cloud",
   builder: yargs => {},
-  handler: argv => {
-    if (appWorkers) {
-      console.log("worker queue not implemented for firebase yet");
-    }
-    if (appCron) {
-      console.log("cron not implemented for firebase yet");
-    }
+  handler: async argv => {
+    await init();
+
     const args = ["serve", ...process.argv.slice(3)];
     const newCwd = path.join(__dirname, "../../");
     const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");
