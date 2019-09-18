@@ -1,7 +1,13 @@
-import path from "path";
+import { PubSub } from "@google-cloud/pubsub";
+
+let pubsub;
 
 export const init = () => {
-  // onlyQueue.process(path.join(__dirname, "worker.js"));
+  pubsub = new PubSub();
 };
 
-export const push = (jobName, args) => {};
+export const push = async (jobName, args) => {
+  const dataBuffer = Buffer.from(JSON.stringify(args));
+  await pubsub.topic(jobName).publish(dataBuffer);
+  return true;
+};

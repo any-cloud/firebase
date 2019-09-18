@@ -1,5 +1,5 @@
 import { https, pubsub } from "firebase-functions";
-import { http, cron } from "@any-cloud/core";
+import { http, cron, workers } from "@any-cloud/core";
 
 const server = http();
 
@@ -11,4 +11,13 @@ Object.keys(cron).forEach(cronJobName => {
   const cronJob = cron[cronJobName];
   const [cronSpec, cronFn] = cronJob;
   module.exports[cronJobName] = pubsub.schedule(cronSpec).onRun(cronFn);
+});
+
+Object.keys(workers).forEach(workerJobName => {
+  const workerJobFn = workers[workerJobName];
+  module.exports[workerJobName] = pubsub
+    .topic(workerJobName)
+    .onPublish(message => {
+      return workerJobFn(message.json);
+    });
 });
