@@ -24,10 +24,19 @@ export const get = async aKey => {
   }
 };
 
-export const getAll = async partialKey => {
+export const getAllKeys = async partialKey => {
   const collectionRef = db.collection(common.unwrapKey(partialKey));
   const documentRefs = await collectionRef.listDocuments();
   if (documentRefs.length === 0) return [];
+  return documentRefs.map(ref => common.key(ref.path));
+};
+
+export const getAll = async partialKeyOrKeys => {
+  let keys = partialKeyOrKeys;
+  if (typeof partialKeyOrKeys === "string") {
+    keys = await getAllKeys(partialKey);
+  }
+  const documentRefs = keys.map(k => db.doc(common.unwrapKey(k)));
   const documentSnapshots = await db.getAll(...documentRefs);
   return documentSnapshots.filter(doc => doc.exists).map(doc => doc.data());
 };
