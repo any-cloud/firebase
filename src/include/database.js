@@ -16,12 +16,17 @@ export const set = (aKey, value) => {
 export const get = async aKey => {
   const result = await db.doc(common.unwrapKey(aKey)).get();
   if (!result || !result.exists) {
-    const namespace = common.unwrapKey(aKey).split(keySep);
-    let lastKeyPart = namespace.pop();
     console.error(`key not found '${common.unwrapKey(aKey)}'`);
   } else if (result.exists) {
     return result.data();
   }
+};
+
+export const getAllKeys = async partialKey => {
+  const collectionRef = db.collection(common.unwrapKey(partialKey));
+  const documentRefs = await collectionRef.listDocuments();
+  if (documentRefs.length === 0) return [];
+  return documentRefs.map(ref => common.key(...ref.path.split(keySep)));
 };
 
 export const getAll = async partialKey => {

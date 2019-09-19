@@ -1,6 +1,5 @@
 const path = require("path");
 const { spawn } = require("child_process");
-const { cron: appCron, workers: appWorkers } = require(process.cwd());
 
 export default {
   command: "firebase",
@@ -12,7 +11,7 @@ export default {
     const child = spawn(
       require.resolve("firebase-tools/lib/bin/firebase"),
       args,
-      { cwd: path.join(__dirname, "../../") }
+      { cwd: path.join(__dirname, "../../"), env: process.env }
     );
 
     child.stdout.pipe(process.stdout);

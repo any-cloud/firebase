@@ -9,8 +9,6 @@ export default {
   desc: "start a simulated firebase runtime of any-cloud",
   builder: yargs => {},
   handler: async argv => {
-    await init();
-
     const args = ["serve", ...process.argv.slice(3)];
     const newCwd = path.join(__dirname, "../../");
     const appCodeLinkPath = path.join(newCwd, "AC_APPLICATION_CODE");

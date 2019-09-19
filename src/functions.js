@@ -1,6 +1,7 @@
 import { https, pubsub } from "firebase-functions";
-import { http, cron, workers } from "@any-cloud/core";
+import { http, cron, workers, init } from "@any-cloud/core";
 
+init();
 const server = http();
 
 // Graphql api
